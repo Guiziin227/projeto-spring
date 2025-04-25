@@ -1,4 +1,4 @@
-package com.example.projeto.resouces;
+package com.example.projeto.resources;
 
 import com.example.projeto.entities.User;
 import org.springframework.http.ResponseEntity;
