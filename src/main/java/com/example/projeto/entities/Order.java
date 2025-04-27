@@ -2,17 +2,21 @@ package com.example.projeto.entities;
 
 import com.example.projeto.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -27,20 +31,29 @@ public class Order implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant instant;
 
+    private Integer orderStatus;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
 
-    private Integer orderStatus;
+    @OneToMany(mappedBy = "orderItemPK.order")
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     public Order() {
     }
+
+
 
     public Order(Long id, Instant instant, OrderStatus orderStatus, User client) {
         this.id = id;
         this.instant = instant;
         setOrderStatus(orderStatus);
         this.client = client;
+    }
+
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
     public OrderStatus getOrderStatus() {
