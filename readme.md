@@ -73,32 +73,6 @@ Para usar MySQL em vez do H2:
    java -jar -Dspring.profiles.active=mysql target/projeto spring-0.0.1-SNAPSHOT.jar
    ```
 
-## Depuração Remota
-
-Para habilitar a depuração remota:
-
-- Execute com:
-  ```bash
-  mvn spring-boot:run -Drun.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
-  ```
-- Ou:
-  ```bash
-  java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dspring.profiles.active=test -jar target/projeto spring-0.0.1-SNAPSHOT.jar
-  ```
-- Conecte-se a `localhost:5005` usando o recurso de depuração remota do seu IDE.
-
-## Contribuições
-
-Se você deseja contribuir para este projeto, por favor, abra um issue ou envie um pull request no [repositório GitHub](https://github.com/Guiziin227/projeto spring.git).
-
-## Licença
-
-Este projeto está licenciado sob a **Licença MIT**.
-
-## Contato
-
-Para mais informações, entre em contato com [insira seu e-mail ou outro contato aqui].
-
 ---
 
 # Spring Project
@@ -175,17 +149,3 @@ To use MySQL instead of H2:
    ```bash
    java -jar -Dspring.profiles.active=mysql target/projeto spring-0.0.1-SNAPSHOT.jar
    ```
-
-## Remote Debugging
-
-To enable remote debugging:
-
-- Run with:
-  ```bash
-  mvn spring-boot:run -Drun.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
-  ```
-- Or:
-  ```bash
-  java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dspring.profiles.active=test -jar target/projeto spring-0.0.1-SNAPSHOT.jar
-  ```
-- Connect to `localhost:5005` using your IDE's remote debugging feature.
