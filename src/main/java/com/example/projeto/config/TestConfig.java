@@ -3,6 +3,7 @@ package com.example.projeto.config;
 import com.example.projeto.entities.Category;
 import com.example.projeto.entities.Order;
 import com.example.projeto.entities.OrderItem;
+import com.example.projeto.entities.Payment;
 import com.example.projeto.entities.Product;
 import com.example.projeto.entities.User;
 import com.example.projeto.entities.enums.OrderStatus;
@@ -80,5 +81,9 @@ public class TestConfig implements CommandLineRunner {
         OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
         OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
         orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+
+        Payment pay1 = new Payment(null, Instant.parse("2025-03-12T14:02:23Z"), o1);
+        o1.setPayment(pay1); //classe dependente nao precisa do repositorio
+        orderRepository.save(o1);
     }
 }
