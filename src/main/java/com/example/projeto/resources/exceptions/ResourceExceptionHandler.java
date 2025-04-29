@@ -13,11 +13,11 @@ import java.time.Instant;
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<StandardError> resourceNotFound(Exception ex, HttpServletRequest request) {
-        String error = ex.getMessage();
+    public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException ex, HttpServletRequest request) {
+        String error = "Resource not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
 
-        StandardError err = new StandardError(Instant.now(), status.value(), "Resource not found", error, request.getRequestURI());
+        StandardError err = new StandardError(Instant.now(), status.value(), "Resource not found", ex.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 }
