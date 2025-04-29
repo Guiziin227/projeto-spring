@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.io.Serializable;
@@ -31,13 +32,17 @@ public class Product implements Serializable {
     private Double price;
     private String urlImage;
 
-    @JsonIgnore
+
     @ManyToMany
     @JoinTable(name = "tb_product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private Set<Category> categories  = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "orderItemPK.product")
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     public Product() {}
 
@@ -91,6 +96,15 @@ public class Product implements Serializable {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrders(){
+        Set<Order> orders = new HashSet<>();
+        for (OrderItem orderItem : orderItems) {
+            orders.add(orderItem.getOrder());
+        }
+        return orders;
     }
 
     @Override
